@@ -31,4 +31,26 @@ program
     console.log(data);
   });
 
+program
+  .command("update")
+  .description("to update a specific to-do item using its id")
+  .requiredOption("-t, --title <string>", "new title")
+  .requiredOption("-i, --id <string>", "item id")
+  .action((options) => {
+    // reading the current data
+    const dataString = fs.readFileSync("./db.json", { encoding: "utf-8" });
+    const data = JSON.parse(dataString);
+
+    // updating data
+    const newData = data.map((toDoItem) => {
+      if (toDoItem.id == +options.id) {
+        toDoItem.item = options.title;
+      }
+      return toDoItem;
+    });
+
+    // writing the new data
+    fs.writeFileSync("./db.json", JSON.stringify(newData, null, 2));
+  });
+
 program.parse();

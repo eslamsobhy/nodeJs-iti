@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { program } = require("commander");
+const { log } = require("console");
 
 program
   .command("add")
@@ -19,6 +20,15 @@ program
 
     data.push(toDoItem);
     fs.writeFileSync("./db.json", JSON.stringify(data, null, 2));
+  });
+
+program
+  .command("list")
+  .description("to display all the list items")
+  .action((options) => {
+    const dataString = fs.readFileSync("./db.json", { encoding: "utf-8" });
+    const data = JSON.parse(dataString);
+    console.log(data);
   });
 
 program.parse();

@@ -53,4 +53,20 @@ program
     fs.writeFileSync("./db.json", JSON.stringify(newData, null, 2));
   });
 
+program
+  .command("delete")
+  .description("to delete a to-do item")
+  .requiredOption("-i, --id <string>", "the item id")
+  .action((options) => {
+    // reading the current data
+    const dataString = fs.readFileSync("./db.json", { encoding: "utf-8" });
+    const data = JSON.parse(dataString);
+
+    // deleting the specified item
+    const newData = data.filter((toDoItem) => toDoItem.id !== +options.id);
+
+    // writing the new data
+    fs.writeFileSync("./db.json", JSON.stringify(newData, null, 2));
+  });
+
 program.parse();

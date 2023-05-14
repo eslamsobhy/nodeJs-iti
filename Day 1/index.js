@@ -1,6 +1,5 @@
 const fs = require("fs");
 const { program } = require("commander");
-const { log } = require("console");
 
 program
   .command("add")
@@ -16,6 +15,7 @@ program
     const toDoItem = {
       id: lastId + 1,
       item: options.title,
+      status: "to-do",
     };
 
     data.push(toDoItem);
@@ -25,10 +25,14 @@ program
 program
   .command("list")
   .description("to display all the list items")
-  .action((options) => {
+  .action(() => {
     const dataString = fs.readFileSync("./db.json", { encoding: "utf-8" });
-    const data = JSON.parse(dataString);
-    console.log(data);
+    if (!dataString) {
+      console.log("Nothing to-do :)");
+    } else {
+      const data = JSON.parse(dataString);
+      console.log(data);
+    }
   });
 
 program

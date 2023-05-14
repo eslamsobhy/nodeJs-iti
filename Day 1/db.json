@@ -1,14 +1,17 @@
 [
   {
     "id": 1,
-    "item": "playing football"
+    "item": "Angular project finish",
+    "status": "to-do"
   },
   {
     "id": 2,
-    "item": "finish mongoDB task-1"
+    "item": "Node.js bonus section",
+    "status": "to-do"
   },
   {
     "id": 3,
-    "item": "finish mongoDB task-2"
+    "item": "Playing football",
+    "status": "to-do"
   }
 ]

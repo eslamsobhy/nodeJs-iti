@@ -50,19 +50,24 @@ program
   .action((options) => {
     // reading the current data
     const dataString = fs.readFileSync("./db.json", { encoding: "utf-8" });
-    const data = JSON.parse(dataString);
 
-    // updating data
-    const newData = data.map((toDoItem) => {
-      if (toDoItem.id == +options.id) {
-        toDoItem.item = options.title || toDoItem.item;
-        toDoItem.status = options.status || toDoItem.status;
-      }
-      return toDoItem;
-    });
+    if (!dataString) {
+      console.log("The to-do list is empty!!");
+    } else {
+      const data = JSON.parse(dataString);
 
-    // writing the new data
-    fs.writeFileSync("./db.json", JSON.stringify(newData, null, 2));
+      // updating data
+      const newData = data.map((toDoItem) => {
+        if (toDoItem.id == +options.id) {
+          toDoItem.item = options.title || toDoItem.item;
+          toDoItem.status = options.status || toDoItem.status;
+        }
+        return toDoItem;
+      });
+
+      // writing the new data
+      fs.writeFileSync("./db.json", JSON.stringify(newData, null, 2));
+    }
   });
 
 program

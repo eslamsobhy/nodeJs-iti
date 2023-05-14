@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { program } = require("commander");
+const { program, Option } = require("commander");
 
 program
   .command("add")
@@ -38,8 +38,15 @@ program
 program
   .command("update")
   .description("to update a specific to-do item using its id")
-  .requiredOption("-t, --title <string>", "new title")
+  .option("-t, --title <string>", "new title")
   .requiredOption("-i, --id <string>", "item id")
+  .addOption(
+    new Option("-s, --status <string>", "the new status").choices([
+      "to-do",
+      "done",
+      "in-progress",
+    ])
+  )
   .action((options) => {
     // reading the current data
     const dataString = fs.readFileSync("./db.json", { encoding: "utf-8" });
@@ -48,7 +55,8 @@ program
     // updating data
     const newData = data.map((toDoItem) => {
       if (toDoItem.id == +options.id) {
-        toDoItem.item = options.title;
+        toDoItem.item = options.title || toDoItem.item;
+        toDoItem.status = options.status || toDoItem.status;
       }
       return toDoItem;
     });

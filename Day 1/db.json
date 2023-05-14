@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "item": "Angular project finish",
-    "status": "to-do"
+    "item": "Playing Football",
+    "status": "in-progress"
   },
   {
     "id": 2,
-    "item": "Node.js bonus section",
-    "status": "to-do"
+    "item": "Finish The Last Angular Project",
+    "status": "done"
   },
   {
     "id": 3,
-    "item": "Playing football",
+    "item": "node.js second section",
     "status": "to-do"
   }
 ]

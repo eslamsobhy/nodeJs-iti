@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "item": "Playing Football",
+    "status": "to-do"
+  },
+  {
+    "id": 2,
+    "item": "Finished The Angular Project",
+    "status": "done"
+  },
+  {
+    "id": 3,
+    "item": "Finished the Node.js Bonus questions",
+    "status": "done"
+  }
+]

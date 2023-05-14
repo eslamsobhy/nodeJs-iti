@@ -25,12 +25,25 @@ program
 program
   .command("list")
   .description("to display all the list items")
-  .action(() => {
+  .addOption(
+    new Option("-s, --status <string>", "the item status").choices([
+      "to-do",
+      "in-progress",
+      "done",
+    ])
+  )
+  .action((options) => {
     const dataString = fs.readFileSync("./db.json", { encoding: "utf-8" });
     if (!dataString) {
       console.log("Nothing to-do :)");
     } else {
       const data = JSON.parse(dataString);
+      if (options.status) {
+        const filteredData = data.filter(
+          (item) => item.status === options.status
+        );
+        return console.log(filteredData);
+      }
       console.log(data);
     }
   });

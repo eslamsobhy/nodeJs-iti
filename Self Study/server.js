@@ -1,5 +1,6 @@
 const http = require("http");
 const fs = require("fs");
+const { log } = require("console");
 
 const server = http.createServer((req, res) => {
   //   console.log(req.url, req.method, req.headers);
@@ -27,16 +28,15 @@ const server = http.createServer((req, res) => {
       body.push(chunck);
     });
 
-    req.on("end", () => {
+    return req.on("end", () => {
       const parsedBody = Buffer.concat(body).toString();
       //   console.log(parsedBody);
       const message = parsedBody.split("=")[1];
       fs.writeFileSync("message.txt", message);
+      res.statusCode = 302;
+      res.setHeader("Location", "/");
+      return res.end();
     });
-
-    res.statusCode = 302;
-    res.setHeader("Location", "/");
-    return res.end();
   }
 
   res.write(`<h1>Hello There!</h1>`);

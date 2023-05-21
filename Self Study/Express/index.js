@@ -1,19 +1,27 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log("This will always run for each request!");
-  next();
+// to parse the body data coming from a form
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use("/add-product", (req, res, next) => {
+  res.send(`
+    <form action="/products" method="POST">
+      <input type="text" name="title" />
+      <button type="submit">Add Product</button>
+    </form>
+  `);
 });
 
-app.use("/add", (req, res, next) => {
-  console.log("will just run for '/add' request!");
-  res.send("<h1>The adding page</h1>");
+app.use("/products", (req, res, next) => {
+  console.log(req.body);
+  res.redirect("/");
 });
 
 app.use("/", (req, res, next) => {
-  console.log("Hello from middleware!!");
   res.send("<h1>Hello from Express.js</h1>"); // send response
 });
 

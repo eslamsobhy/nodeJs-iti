@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/admin", adminRouter);
+app.use("/admin", adminRouter.router);
 app.use(shopRouter);
 
 // handling the not found routes

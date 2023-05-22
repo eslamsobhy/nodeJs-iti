@@ -7,6 +7,9 @@ const app = express();
 const adminRouter = require("./routes/admin");
 const shopRouter = require("./routes/shop");
 
+// make this directory accessable by the whole application
+app.use(express.static(path.join(__dirname, "public")));
+
 // to parse the body data coming from a form
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

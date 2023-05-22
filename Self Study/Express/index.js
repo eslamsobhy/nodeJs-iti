@@ -10,8 +10,8 @@ const shopRouter = require("./routes/shop");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(adminRouter);
-app.use(shopRouter);
+app.use("/admin", adminRouter);
+app.use("/shop", shopRouter);
 
 // handling the not found routes
 app.use((req, res, next) => {

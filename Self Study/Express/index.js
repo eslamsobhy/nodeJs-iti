@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/admin", adminRouter);
-app.use("/shop", shopRouter);
+app.use(shopRouter);
 
 // handling the not found routes
 app.use((req, res, next) => {
